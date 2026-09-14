@@ -46,3 +46,16 @@ blockquote a { font-weight: 700; }
 [dir="rtl"] .pages, [dir="rtl"] nav { justify-content:flex-start; }
 [dir="rtl"] blockquote { border-left:none; border-right:3px solid var(--accent); }
 [dir="rtl"] ul { padding-left:0; padding-right:20px; }
+
+/* The two store buttons on the start page. Before release they carry no link: the label
+   stays, and a small "coming soon" says why nothing happens when you press it. */
+.stores { display: flex; flex-wrap: wrap; gap: 12px; margin: 4px 0 8px; }
+.stores .store {
+  display: inline-flex; align-items: center; gap: 10px;
+  min-height: 48px; padding: 10px 20px; border-radius: 14px;
+  font-weight: 700; text-decoration: none;
+  border: 2px solid var(--accent); color: var(--accent); background: var(--card);
+}
+.stores a.store:hover { background: var(--accent); color: var(--card); }
+.stores .store.off { border-style: dashed; opacity: 0.75; cursor: default; }
+.stores .store.off em { font-style: normal; font-weight: 600; opacity: 0.7; font-size: 0.85em; }
