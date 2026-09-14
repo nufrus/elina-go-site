@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="all" />
+<title>Elina Go!</title>
+<link rel="icon" href="icon.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="wrap">
+  <div class="pages"><a href="./" aria-current="page">Start</a><a href="datenschutz.html">Datenschutz</a><a href="support.html">Support</a></div>
+  <header>
+    <h1>Elina Go!</h1>
+    <nav aria-label="Sprache / Language">
+      <button data-go="de" aria-current="true">DE</button><button data-go="en">EN</button><button data-go="fr">FR</button><button data-go="pl">PL</button>
+    </nav>
+  </header>
+
+  <section data-lang="de" class="active">
+    <p class="lead">Ein Vokabel- und Grammatiktrainer für Kinder. Englisch, Französisch, Spanisch,
+      Italienisch, Polnisch und Deutsch — in dreizehn Muttersprachen erklärt.</p>
+    <p>Vokabeln aus dem eigenen Schulheft lassen sich abfotografieren und werden zu Karten. Alles
+      andere sind fertige Kurse von A1 bis B2, mit Beispielsätzen, Grammatik und Aussprache.</p>
+    <h2>Was die App nicht tut</h2>
+    <p>Sie legt kein Konto an, verlangt keine Anmeldung und sendet nichts an uns. Der gesamte
+      Lernfortschritt bleibt auf dem Gerät. Eine Sicherung geht ausschließlich in die eigene Cloud
+      des Nutzers, also iCloud Drive oder Google Drive. Es gibt keine Werbung.</p>
+    <div class="cards">
+      <a href="datenschutz.html"><strong>Datenschutz</strong><span>Was gespeichert wird und was nicht</span></a>
+      <a href="support.html"><strong>Support</strong><span>Fragen, Probleme, Kontakt</span></a>
+    </div>
+  </section>
+
+  <section data-lang="en">
+    <p class="lead">A vocabulary and grammar trainer for children. English, French, Spanish, Italian,
+      Polish and German — explained in thirteen native languages.</p>
+    <p>Words from a child's own exercise book can be photographed and turned into cards. Everything
+      else comes as prepared courses from A1 to B2, with example sentences, grammar and pronunciation.</p>
+    <h2>What the app does not do</h2>
+    <p>It creates no account, asks for no sign-in and sends us nothing. All learning progress stays on
+      the device. A backup goes only into the user's own cloud, that is iCloud Drive or Google Drive.
+      There are no adverts.</p>
+    <div class="cards">
+      <a href="datenschutz.html"><strong>Privacy</strong><span>What is stored and what is not</span></a>
+      <a href="support.html"><strong>Support</strong><span>Questions, problems, contact</span></a>
+    </div>
+  </section>
+
+  <section data-lang="fr">
+    <p class="lead">Un entraîneur de vocabulaire et de grammaire pour les enfants. Anglais, français,
+      espagnol, italien, polonais et allemand — expliqué en treize langues maternelles.</p>
+    <p>Les mots du cahier d'école peuvent être photographiés et deviennent des cartes. Le reste, ce
+      sont des cours prêts de A1 à B2, avec phrases d'exemple, grammaire et prononciation.</p>
+    <h2>Ce que l'application ne fait pas</h2>
+    <p>Elle ne crée aucun compte, ne demande aucune inscription et ne nous envoie rien. Toute la
+      progression reste sur l'appareil. Une sauvegarde va uniquement dans le nuage personnel de
+      l'utilisateur, iCloud Drive ou Google Drive. Il n'y a aucune publicité.</p>
+    <div class="cards">
+      <a href="datenschutz.html"><strong>Confidentialité</strong><span>Ce qui est enregistré, et ce qui ne l'est pas</span></a>
+      <a href="support.html"><strong>Assistance</strong><span>Questions, problèmes, contact</span></a>
+    </div>
+  </section>
+
+  <section data-lang="pl">
+    <p class="lead">Trener słówek i gramatyki dla dzieci. Angielski, francuski, hiszpański, włoski,
+      polski i niemiecki — objaśniany w trzynastu językach ojczystych.</p>
+    <p>Słówka z własnego zeszytu można sfotografować, a aplikacja zrobi z nich fiszki. Reszta to
+      gotowe kursy od A1 do B2, ze zdaniami przykładowymi, gramatyką i wymową.</p>
+    <h2>Czego aplikacja nie robi</h2>
+    <p>Nie zakłada konta, nie wymaga logowania i niczego do nas nie wysyła. Cały postęp zostaje na
+      urządzeniu. Kopia zapasowa trafia wyłącznie do własnej chmury użytkownika, czyli iCloud Drive
+      lub Google Drive. Nie ma reklam.</p>
+    <div class="cards">
+      <a href="datenschutz.html"><strong>Prywatność</strong><span>Co jest zapisywane, a co nie</span></a>
+      <a href="support.html"><strong>Pomoc</strong><span>Pytania, problemy, kontakt</span></a>
+    </div>
+  </section>
+
+  <footer>Elina Go! · <span>Matthias Wahl</span></footer>
+</div>
+<script>
+  const buttons = document.querySelectorAll('nav button');
+  const sections = document.querySelectorAll('section[data-lang]');
+  function show(lang) {
+    sections.forEach(s => s.classList.toggle('active', s.dataset.lang === lang));
+    buttons.forEach(b => b.setAttribute('aria-current', b.dataset.go === lang ? 'true' : 'false'));
+    document.documentElement.lang = lang;
+    try { history.replaceState(null, '', '#' + lang); } catch (e) {}
+  }
+  buttons.forEach(b => b.addEventListener('click', () => show(b.dataset.go)));
+  const initial = (location.hash || '').replace('#', '');
+  show(['de', 'en', 'fr', 'pl'].includes(initial) ? initial : 'de');
+</script>
+</body>
+</html>

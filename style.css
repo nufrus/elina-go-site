@@ -1,0 +1,42 @@
+:root { --bg:#ffffff; --fg:#1f2937; --muted:#6b7280; --line:#e5e7eb; --accent:#6d28d9; --card:#f8fafc; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#0f172a; --fg:#e5e7eb; --muted:#94a3b8; --line:#1f2937; --accent:#a78bfa; --card:#111827; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 24px 20px 64px; }
+  header { display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;
+    border-bottom:1px solid var(--line); padding-bottom:16px; margin-bottom:8px; }
+  h1 { font-size:20px; margin:0; }
+  nav { display:flex; gap:6px; }
+  nav button { font:inherit; font-weight:700; cursor:pointer; border:1px solid var(--line);
+    background:var(--card); color:var(--fg); border-radius:999px; padding:6px 12px; }
+  nav button[aria-current="true"] { background:var(--accent); color:#fff; border-color:var(--accent); }
+  h2 { font-size:17px; margin:28px 0 6px; }
+  a { color:var(--accent); }
+  .muted { color:var(--muted); font-size:14px; }
+  ul { padding-left:20px; }
+  blockquote { margin:8px 0; padding:10px 14px; background:var(--card); border-left:3px solid var(--accent);
+    border-radius:8px; color:var(--muted); }
+  section[data-lang] { display:none; }
+  section[data-lang].active { display:block; }
+  footer { margin-top:40px; color:var(--muted); font-size:13px; border-top:1px solid var(--line); padding-top:16px; }
+
+/* Added 2026-09-14 when the single privacy page became a small site. */
+.lead { font-size: 17px; }
+.cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin: 18px 0; }
+.cards a { display: block; text-decoration: none; color: var(--fg); background: var(--card);
+  border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.cards a:hover, .cards a:focus-visible { border-color: var(--accent); }
+.cards strong { display: block; color: var(--accent); margin-bottom: 2px; }
+.cards span { font-size: 14px; color: var(--muted); }
+.pages { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.pages a { font: inherit; font-size: 14px; font-weight: 700; text-decoration: none;
+  border: 1px solid var(--line); background: var(--card); color: var(--muted);
+  border-radius: 999px; padding: 5px 13px; }
+.pages a:hover, .pages a:focus-visible { color: var(--fg); border-color: var(--accent); }
+.pages a[aria-current="page"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h3 { font-size: 15px; margin: 18px 0 2px; }
+blockquote a { font-weight: 700; }
