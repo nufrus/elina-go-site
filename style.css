@@ -59,3 +59,17 @@ blockquote a { font-weight: 700; }
 .stores a.store:hover { background: var(--accent); color: var(--card); }
 .stores .store.off { border-style: dashed; opacity: 0.75; cursor: default; }
 .stores .store.off em { font-style: normal; font-weight: 600; opacity: 0.7; font-size: 0.85em; }
+
+  /* The feedback form. Ours, on our page - so it looks like the rest of it. */
+  form.feedback { margin:16px 0 0; display:flex; flex-direction:column; gap:10px; }
+  form.feedback textarea { font:inherit; width:100%; padding:10px 12px; border-radius:10px;
+    border:1px solid var(--line); background:var(--card); color:var(--fg); resize:vertical; }
+  form.feedback textarea:focus { outline:2px solid var(--accent); outline-offset:1px; }
+  form.feedback button { font:inherit; font-weight:700; cursor:pointer; align-self:flex-start;
+    border:none; border-radius:999px; padding:10px 22px; background:var(--accent); color:#fff; }
+  form.feedback button:disabled { opacity:.5; cursor:default; }
+  form.feedback .note { margin:0; font-size:14px; color:var(--muted); min-height:1.2em; }
+  /* The honeypot: off the page for eyes AND for screen readers, but still a real field a bot
+     will fill. `display:none` is skipped by some bots, which is the whole point of not using it. */
+  form.feedback input[name="website"] { position:absolute; left:-9999px; width:1px; height:1px;
+    opacity:0; pointer-events:none; }
