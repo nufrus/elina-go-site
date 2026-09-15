@@ -154,8 +154,24 @@
   });
   const navLabels = {"de":{"start":"Start","privacy":"Datenschutz","support":"Support","feedback":"Feedback","imprint":"Impressum"},"en":{"start":"Start","privacy":"Privacy","support":"Support","feedback":"Feedback","imprint":"Legal notice"},"fr":{"start":"Accueil","privacy":"Confidentialité","support":"Assistance","feedback":"Retour","imprint":"Mentions légales"},"es":{"start":"Inicio","privacy":"Privacidad","support":"Ayuda","feedback":"Comentarios","imprint":"Aviso legal"},"pl":{"start":"Start","privacy":"Prywatność","support":"Pomoc","feedback":"Opinia","imprint":"Nota prawna"},"it":{"start":"Inizio","privacy":"Privacy","support":"Assistenza","feedback":"Riscontro","imprint":"Note legali"},"nl":{"start":"Start","privacy":"Privacy","support":"Hulp","feedback":"Feedback","imprint":"Colofon"},"da":{"start":"Start","privacy":"Privatliv","support":"Hjælp","feedback":"Feedback","imprint":"Kolofon"},"ru":{"start":"Начало","privacy":"Конфиденциальность","support":"Поддержка","feedback":"Отзыв","imprint":"Выходные данные"},"ar":{"start":"البداية","privacy":"الخصوصية","support":"الدعم","feedback":"ملاحظات","imprint":"بيانات الناشر"},"tr":{"start":"Başlangıç","privacy":"Gizlilik","support":"Destek","feedback":"Geri bildirim","imprint":"Künye"},"zh":{"start":"首页","privacy":"隐私","support":"支持","feedback":"反馈","imprint":"法律声明"},"vi":{"start":"Trang đầu","privacy":"Quyền riêng tư","support":"Hỗ trợ","feedback":"Góp ý","imprint":"Thông tin pháp lý"}};
   const known = ["de","en","fr","es","pl","it","nl","da","ru","ar","tr","zh","vi"];
-  const initial = (location.hash || '').replace('#', '');
-  show(known.includes(initial) ? initial : (known.find((l) => navigator.language.startsWith(l)) || 'de'));
+  // Inlined from scripts/lib/pickLang.mjs so the page and its test run the SAME rule: the app
+  // asks for a language in the address, and ignoring that put a German child on the English
+  // page (2026-09-15). A copy here would be a copy that drifts.
+  function pickLang({ hash, search, navigatorLang, known }) {
+  const has = (v) => (v && known.indexOf(v) !== -1 ? v : '');
+
+  // Exact matches only: 'den' is not German, and 'de-informal' is not a language we have.
+  const asked = has(new URLSearchParams(String(search || '').replace(/^\?/, '')).get('lang') || '');
+  if (asked) return asked;
+
+  const linked = has(String(hash || '').replace('#', ''));
+  if (linked) return linked;
+
+  // The browser's tag is a full locale ('fr-CA'), so here a prefix IS the right comparison.
+  const tag = String(navigatorLang || '');
+  return known.find((l) => tag.toLowerCase().startsWith(l)) || 'de';
+}
+  show(pickLang({ hash: location.hash, search: location.search, navigatorLang: navigator.language, known: known }));
 </script>
 </body>
 </html>
